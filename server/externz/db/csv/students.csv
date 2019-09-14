@@ -1,0 +1,11 @@
+fname,mname,lname,phone,street,city,state,zip,major,education,degree,image,user_id
+Nilsa,J.,Francis,478-929-9963,3135 White Lane,Warner Robins,Ga,31093,Computer Science,freshmen,FALSE,https:\/\/randomuser.me\/api\/portraits\/women\/21.jpg,1
+Jonathan,J.,Paulson,626-230-9776,2525 Rainbow Road,Santa Fe Springs,Ca,90670,Marketing,sophomore,FALSE,"""https:\/\/randomuser.me\/api\/portraits\/men\/43.jpg""",2
+Dorothy ,R., Stringer,770-219-9167,675 Fowler Avenue,Adairsville,Ga,30103,Accounting,junior,FALSE,"""https:\/\/randomuser.me\/api\/portraits\/women\/44.jpg""",3
+Ismael ,H., Lester,678-206-6156,2291 Flint Street,Atlanta,Ga,30329,Finance,senior,FALSE,"""https:\/\/randomuser.me\/api\/portraits\/men\/78.jpg""",4
+Mark ,S. ,Donofrio﻿﻿,301-978-4744,3636 Lake Floyd Circle,Gaithersburg,Ga,20877,Computer Science,graduate ,TRUE,"https:\/\/randomuser.me\/api\/portraits\/men\/86.jpg""",5
+Bernita ,R., Swisher,312-863-8996,1841 Tator Patch Road,Chicago,IL,60605,Network Engineering,junior,FALSE,"""https:\/\/randomuser.me\/api\/portraits\/women\/65.jpg""",6
+Jake ,J., Sykes,918-250-6537,1907 Henry Ford Avenue,Tulsa,Ok,74133,Mechanical Engineering,senior,FALSE,"""https:\/\/randomuser.me\/api\/portraits\/men\/97.jpg""",7
+Alexandra,R. ,Nelson,619-567-6847,4271 Poplar Avenue,San Diego,Ca,92123,Economics,sophomore,TRUE,"""https:\/\/randomuser.me\/api\/portraits\/women\/26.jpg""",8
+Willie, B. ,Lieberman,401-793-8677,1856 Bond Street,Providence,RI,29031,Marketing,freshmen,FALSE,"""https:\/\/randomuser.me\/api\/portraits\/men\/61.jpg""",9
+Keith ,J. ,Green,850-859-5030,6 Woodside Circle,Glendale,Fl,32433,SupplyChain,graduate ,TRUE,"""https:\/\/randomuser.me\/api\/portraits\/men\/33.jpg""",10
