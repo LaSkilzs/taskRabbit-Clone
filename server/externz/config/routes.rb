@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :categories
 
     post '/login', to: 'auth#login'
-    get '/profile', to: 'auth#profile'
+    get '/authenticate', to: 'auth#authenticate'
   end
  end
 end
