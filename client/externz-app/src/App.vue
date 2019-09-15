@@ -1,36 +1,33 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-app-bar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
+    <Navbar />
+    <Login />
+    <!-- <main> -->
+    <!-- <Home /> -->
+    <!-- </main> -->
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Navbar from "./components/Navbar";
+import Login from "./components/Login";
+import Home from "./components/Home";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld,
+    Navbar,
+    Login,
+    Home
   },
   data: () => ({
+    homePic: require("./images/Home.png")
     //
-  }),
+  })
 };
 </script>
+<style scoped>
+.app {
+  background: url("http://images5.fanpop.com/image/photos/31500000/Lpspinkysaskia-official-picturee-the-lps-club-31548229-300-300.jpg");
+}
+</style>
