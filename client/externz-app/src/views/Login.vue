@@ -1,7 +1,7 @@
 <template>
   <v-card width="600" class="card mx-auto">
     <v-card-title>
-      <h1 class="display-1">Login</h1>
+      <h1 class="loginHead display-1">Login</h1>
     </v-card-title>
     <v-card-text>
       <v-form>
@@ -17,11 +17,12 @@
       </v-form>
     </v-card-text>
     <v-card-actions>
-      <v-btn color="#46d5bb">Register</v-btn>
-      <v-spacer></v-spacer>
-
-      <v-btn color="#fa4938">Login</v-btn>
+      <v-btn class="loginbtn mx-auto pa-2" color="#fa4938">Login</v-btn>
     </v-card-actions>
+    <v-text class="text">
+      Not Registered?
+      <router-link to="/signup">Sign Up</router-link>Today
+    </v-text>
   </v-card>
 </template>
 
@@ -40,6 +41,21 @@ export default {
 
 <style scoped>
 .card {
-  margin-top: 20rem;
+  margin-top: 15rem;
+}
+.text {
+  text-align: center;
+  font-size: 1rem;
+  font-style: italic;
+  margin-left: 12rem;
+}
+.loginbtn {
+  width: 20rem;
+  margin-bottom: 1rem;
+}
+.loginHead {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0 auto;
 }
 </style>

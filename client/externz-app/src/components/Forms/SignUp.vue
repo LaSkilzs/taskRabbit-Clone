@@ -1,0 +1,60 @@
+<template>
+  <v-card width="600" class="card mx-auto">
+    <v-card-title>
+      <h1 class="hea display-1 mx-auto">SignUp</h1>
+    </v-card-title>
+    <v-card-text>
+      <v-form>
+        <v-text-field prepend-icon="mdi-email" label="Email" outlined />
+        <v-text-field
+          prepend-icon="mdi-lock"
+          :type="showPassword ? 'text' : 'password'"
+          label="Enter Password"
+          outlined
+          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="showPassword = !showPassword"
+        />
+        <v-text-field
+          prepend-icon="mdi-lock"
+          :type="showPassword ? 'text' : 'password'"
+          label="Confirm Your Password"
+          outlined
+          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="showPassword = !showPassword"
+        />
+        <v-select prepend-icon="mdi-account-circle" :items="roles" :label="roles.name" outlined></v-select>
+      </v-form>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn color="#fa4938" class="submit mb-5">Submit</v-btn>
+    </v-card-actions>
+  </v-card>
+</template>
+
+<script>
+export default {
+  name: "SignUp",
+  data: () => ({
+    showPassword: false,
+    roles: ["student", "business", "admin"]
+    //
+  })
+};
+</script>
+
+
+
+<style scoped>
+.card {
+  margin-top: 10rem;
+}
+.submit {
+  width: 25rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+.hea {
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+</style>
