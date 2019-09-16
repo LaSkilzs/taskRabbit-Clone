@@ -50,6 +50,35 @@ namespace :import do
     end
   end
 
+  desc "import businesses from csv"
+  task businesses: :environment do
+    filename = File.join Rails.root, "db/csv/businesses.csv"
+
+    CSV.foreach(filename, headers: true) do |row|
+
+      Business.create(name: row['name'],description: row['description'],tagline: row['tagline'], street: row['street'], city: row['city'], state: row['state'], zip: row['zip'], industry_id: row['industry_id'], user_id: row['user_id'])
+    end
+  end
+
+  desc "import industries from csv"
+  task industries: :environment do
+    filename = File.join Rails.root, "db/csv/industries.csv"
+
+    CSV.foreach(filename, headers: true) do |row|
+
+      Industry.create(name: row['name'])
+    end
+  end
+
+  desc "import projects from csv"
+  task projects: :environment do
+    filename = File.join Rails.root, "db/csv/projects.csv"
+
+    CSV.foreach(filename, headers: true) do |row|
+      Project.create(name: row['name'], description: row['description'], duration: row["duration"], rate: row["rate"].to_i, start: row["start"], image: row["image"],status: row["status"])
+    end
+  end
+
   
 
 end
