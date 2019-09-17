@@ -33,6 +33,6 @@ class Api::V1::ProjectSkillsController < ApplicationController
 
   private
   def project_skill_params
-    params.require(:project_skill).permit(:email, :password, :role)
+    params.require(:project_skill).permit(:project_id, :skill_id)
   end
 end

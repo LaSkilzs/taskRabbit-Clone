@@ -5,7 +5,7 @@
     </v-card-title>
     <v-card-text>
       <v-form>
-        <v-text-field prepend-icon="mdi-email" label="Email" outlined />
+        <v-text-field prepend-icon="mdi-email" label="Email" outlined v-model="signupData.email" />
         <v-text-field
           prepend-icon="mdi-lock"
           :type="showPassword ? 'text' : 'password'"
@@ -13,6 +13,7 @@
           outlined
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="showPassword = !showPassword"
+          v-model="signupData.password"
         />
         <v-text-field
           prepend-icon="mdi-lock"
@@ -21,8 +22,15 @@
           outlined
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="showPassword = !showPassword"
+          v-model="signupData.confirmation"
         />
-        <v-select prepend-icon="mdi-account-circle" :items="roles" :label="roles.name" outlined></v-select>
+        <v-select
+          prepend-icon="mdi-account-circle"
+          :items="roles"
+          :label="roles.name"
+          outlined
+          v-model="signupData.role"
+        ></v-select>
       </v-form>
     </v-card-text>
     <v-card-actions>
@@ -36,7 +44,11 @@ export default {
   name: "SignUp",
   data: () => ({
     showPassword: false,
-    roles: ["student", "business", "admin"]
+    roles: ["student", "business", "admin"],
+    email: "",
+    password: "",
+    confirmation: "",
+    role: ""
     //
   })
 };

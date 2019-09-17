@@ -1,0 +1,32 @@
+ projectData: [
+      {
+        id: 1,
+        company: "XYZ Company",
+        project: "The Best Project Ever",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
+        rate: "tba",
+        duration: "2_days",
+        start: "11/23/2019"
+      },
+      {
+        id: 2,
+        company: "XYZ Company",
+        project: "The Best Project Ever",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
+        rate: "tba",
+        duration: "2_days",
+        start: "11/23/2019"
+      },
+      {
+        id: 3,
+        company: "XYZ Company",
+        project: "The Best Project Ever",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
+        rate: "tba",
+        duration: "2_days",
+        start: "11/23/2019"
+      }
+    ];

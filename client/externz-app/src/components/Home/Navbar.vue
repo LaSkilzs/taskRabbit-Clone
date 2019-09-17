@@ -40,6 +40,7 @@ export default {
 <style >
 .link {
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  color: white !important;
 }
 </style>

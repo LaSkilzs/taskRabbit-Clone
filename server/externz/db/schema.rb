@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_16_034123) do
+ActiveRecord::Schema.define(version: 2019_09_16_135829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,11 +45,9 @@ ActiveRecord::Schema.define(version: 2019_09_16_034123) do
 
   create_table "posted_projects", force: :cascade do |t|
     t.bigint "project_id"
-    t.bigint "business_id"
     t.bigint "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_posted_projects_on_business_id"
     t.index ["project_id"], name: "index_posted_projects_on_project_id"
     t.index ["student_id"], name: "index_posted_projects_on_student_id"
   end
@@ -63,6 +61,15 @@ ActiveRecord::Schema.define(version: 2019_09_16_034123) do
     t.index ["skill_id"], name: "index_project_skills_on_skill_id"
   end
 
+  create_table "project_tasks", force: :cascade do |t|
+    t.bigint "task_id"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_tasks_on_project_id"
+    t.index ["task_id"], name: "index_project_tasks_on_task_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -73,6 +80,8 @@ ActiveRecord::Schema.define(version: 2019_09_16_034123) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "business_id"
+    t.index ["business_id"], name: "index_projects_on_business_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -112,6 +121,12 @@ ActiveRecord::Schema.define(version: 2019_09_16_034123) do
     t.index ["user_id"], name: "index_students_on_user_id"
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -122,11 +137,13 @@ ActiveRecord::Schema.define(version: 2019_09_16_034123) do
 
   add_foreign_key "businesses", "industries"
   add_foreign_key "businesses", "users"
-  add_foreign_key "posted_projects", "businesses"
   add_foreign_key "posted_projects", "projects"
   add_foreign_key "posted_projects", "students"
   add_foreign_key "project_skills", "projects"
   add_foreign_key "project_skills", "skills"
+  add_foreign_key "project_tasks", "projects"
+  add_foreign_key "project_tasks", "tasks"
+  add_foreign_key "projects", "businesses"
   add_foreign_key "skills", "categories"
   add_foreign_key "student_skills", "skills"
   add_foreign_key "student_skills", "students"

@@ -33,6 +33,6 @@ class Api::V1::ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:email, :password, :role)
+    params.require(:project).permit(:name, :description, :duration, :rate, :image, :status, :business_id)
   end
 end

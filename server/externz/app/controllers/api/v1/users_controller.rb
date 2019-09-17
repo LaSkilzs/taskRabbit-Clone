@@ -1,13 +1,18 @@
+require 'byebug'
+
 class Api::V1::UsersController < ApplicationController
+  wrap_parameters format: [:json, :xml, :url_encoded_form, :multipart_form]
+
     def index
     @users = User.all
     render json: @users
   end
 
   def create 
-    user = User.create(user_params)
+    user = User.create("email": params["email"], "role": params["role"],"password": params["password"])
     payload = {user_id: user.id}
-    token = JWT.encode(payload, ENV['SECRET'])
+    token = JWT.encode(payload, "fooseball")
+
     if user.save
       render json: {user: user, jwt: token}
     else

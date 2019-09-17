@@ -7,7 +7,7 @@
       <v-form ref="form" v-model="valid" lazy-validation class="mx-auto">
         <v-col cols="12" class="textRow">
           <v-text-field
-            v-model="fname"
+            v-model="studentData.fname"
             :counter="10"
             :rules="nameRules"
             label="First Name"
@@ -16,7 +16,7 @@
             required
           ></v-text-field>
           <v-text-field
-            v-model="lname"
+            v-model="studentData.lname"
             :counter="10"
             :rules="nameRules"
             label="Last Name"
@@ -25,7 +25,7 @@
             required
           ></v-text-field>
           <v-text-field
-            v-model="phone"
+            v-model="studentData.phone"
             :rules="phoneRules"
             label="Phone"
             outlined
@@ -37,7 +37,7 @@
 
         <v-col cols="12" class="textRow">
           <v-text-field
-            v-model="street"
+            v-model="studentData.street"
             :rules="streetRules"
             label="street"
             outlined
@@ -45,7 +45,7 @@
             required
           ></v-text-field>
           <v-text-field
-            v-model="city"
+            v-model="studentData.city"
             :rules="cityRules"
             label="city"
             outlined
@@ -53,7 +53,7 @@
             required
           ></v-text-field>
           <v-select
-            v-model="select"
+            v-model="studentData.select"
             :items="items"
             :rules="[v => !!v || 'State is required']"
             label="State"
@@ -64,7 +64,7 @@
         </v-col>
         <v-col cols="12" class="textRow">
           <v-text-field
-            v-model="zip"
+            v-model="studentData.zip"
             :rules="zipRules"
             label="zip"
             text="Number"
@@ -74,7 +74,7 @@
           ></v-text-field>
 
           <v-text-field
-            v-model="major"
+            v-model="studentData.major"
             :rules="majorRules"
             label="major"
             text="Number"
@@ -83,7 +83,7 @@
             required
           ></v-text-field>
           <v-text-field
-            v-model="education"
+            v-model="studentData.education"
             :rules="educationRules"
             label="education"
             outlined
@@ -94,7 +94,7 @@
         </v-col>
         <v-col cols="12" class="textRow">
           <v-text-field
-            v-model="degree"
+            v-model="studentData.degree"
             :rules="degreeRules"
             label="degree"
             outlined
@@ -104,7 +104,7 @@
           ></v-text-field>
 
           <v-text-field
-            v-model="image"
+            v-model="studentData.image"
             :rules="imageRules"
             label="image"
             outlined
@@ -113,7 +113,7 @@
             required
           ></v-text-field>
           <v-text-field
-            v-model="userId"
+            v-model="studentData.userId"
             :rules="userIdRules"
             label="userId"
             outlined
@@ -123,7 +123,7 @@
           ></v-text-field>
         </v-col>
         <v-checkbox
-          v-model="checkbox"
+          v-model="studentData.checkbox"
           :rules="[v => !!v || 'You must agree to continue!']"
           label="Do you have a degree?"
           outlined
@@ -138,7 +138,23 @@
 
 <script>
 export default {
-  name: "Student"
+  name: "Student",
+  data: () => ({
+    studentData: {
+      fname: "",
+      lname: "",
+      phone: "",
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+      degree: false,
+      education: "",
+      major: "",
+      image: "",
+      user_id: ""
+    }
+  })
 };
 </script>
 <style scoped>

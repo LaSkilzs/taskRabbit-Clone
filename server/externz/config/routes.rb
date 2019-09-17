@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :projects
     resources :project_skills
     resources :posted_projects
+    resources :tasks
 
     post '/login', to: 'auth#login'
     get '/authenticate', to: 'auth#authenticate'

@@ -1,7 +1,7 @@
 <template>
   <v-row class="rowed">
     <v-col class="d-flex" v-for="item in listItems" :key="item.title">
-      <v-btn>
+      <v-btn class="colbtn">
         <router-link :to="item.path" class="link">{{item.title}}</router-link>
       </v-btn>
     </v-col>
@@ -37,6 +37,7 @@ export default {
 }
 .colbtn {
   display: "flex";
+  background: #fa4938 !important;
 }
 .link {
   text-decoration: none;

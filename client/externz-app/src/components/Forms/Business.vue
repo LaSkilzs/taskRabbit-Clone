@@ -6,7 +6,7 @@
 
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
-        v-model="name"
+        v-model="businessData.name"
         :counter="10"
         :rules="nameRules"
         label="Company Name"
@@ -15,7 +15,7 @@
         required
       ></v-text-field>
       <v-text-field
-        v-model="description"
+        v-model="businessData.description"
         :counter="10"
         :rules="descriptionRules"
         label="description"
@@ -24,7 +24,7 @@
         required
       ></v-text-field>
       <v-text-field
-        v-model="tagLine"
+        v-model="businessData.tagLine"
         :counter="10"
         :rules="tagLineRules"
         label="Company tagLine"
@@ -32,27 +32,24 @@
         class="texted"
         required
       ></v-text-field>
-
       <v-text-field
-        v-model="phone"
-        :rules="phoneRules"
-        label="Phone"
-        outlined
-        class="texted"
-        type="Number"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="street"
+        v-model="businessData.street"
         :rules="streetRules"
         label="street"
         outlined
         class="texted"
         required
       ></v-text-field>
-      <v-text-field v-model="city" :rules="cityRules" label="city" outlined class="texted" required></v-text-field>
+      <v-text-field
+        v-model="businessData.city"
+        :rules="cityRules"
+        label="city"
+        outlined
+        class="texted"
+        required
+      ></v-text-field>
       <v-select
-        v-model="select"
+        v-model="businessData.select"
         :items="items"
         :rules="[v => !!v || 'State is required']"
         label="State"
@@ -61,7 +58,7 @@
         required
       ></v-select>
       <v-text-field
-        v-model="zip"
+        v-model="businessData.zip"
         :rules="zipRules"
         label="zip"
         outlined
@@ -71,14 +68,20 @@
       ></v-text-field>
 
       <v-text-field
-        v-model="industry_id"
+        v-model="businessData.industry_id"
         label="industry_id"
         outlined
         class="texted"
         text="Number"
         required
       ></v-text-field>
-      <v-text-field v-model="userId" label="userId" outlined class="texted" text="Number"></v-text-field>
+      <v-text-field
+        v-model="businessData.userId"
+        label="userId"
+        outlined
+        class="texted"
+        text="Number"
+      ></v-text-field>
 
       <v-btn color="success">Submit</v-btn>
     </v-form>
@@ -87,6 +90,18 @@
 
 <script>
 export default {
-  name: "Business"
+  name: "Business",
+  data: () => ({
+    businessData: {
+      name: "",
+      description: "",
+      tagline: "",
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+      industry_id: ""
+    }
+  })
 };
 </script>

@@ -5,7 +5,7 @@ class Api::V1::AuthController < ApplicationController
     user = User.find_by(username: params["username"])
     if user && user.authenticate(params["password"])
       payload = {user_id: user.id}
-      token = JWT.encode(payload, ENV["SECRET"])
+      token = JWT.encode(payload, "fooseball")
       puts user
       render json: {user: UserSerializer.new(user), jwt: token}
     end
@@ -14,7 +14,7 @@ class Api::V1::AuthController < ApplicationController
   def authenticate
     auth_header = request.headers['Authorization']
     token = auth_header.split(" ")[1]
-    decoded_token = JWT.decode(token, ENV['SECRET'], true, {algorithm: 'HS256'})
+    decoded_token = JWT.decode(token, "fooseball", true, {algorithm: 'HS256'})
     user_id = decoded_token[0]['user_id']
     user = User.find(user_id)
       if user.valid?

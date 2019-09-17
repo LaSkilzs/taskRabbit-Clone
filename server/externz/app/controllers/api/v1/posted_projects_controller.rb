@@ -33,6 +33,6 @@ class Api::V1::PostedProjectsController < ApplicationController
 
   private
   def posted_project_params
-    params.require(:posted_project).permit(:email, :password, :role)
+    params.require(:posted_project).permit(:student_id, :project_id)
   end
 end

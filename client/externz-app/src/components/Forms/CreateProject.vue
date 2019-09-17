@@ -5,7 +5,7 @@
     </v-col>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
-        v-model="name"
+        v-model="projectData.name"
         :counter="10"
         :rules="nameRules"
         label="Company Name"
@@ -13,19 +13,25 @@
         class="texted"
         required
       ></v-text-field>
-      <v-textarea v-model="description" label="description" outlined class="texted" required></v-textarea>
+      <v-textarea
+        v-model="projectData.description"
+        label="description"
+        outlined
+        class="texted"
+        required
+      ></v-textarea>
 
       <v-text-field
-        v-model="pay"
-        :rules="payRules"
-        label="pay"
+        v-model="projectData.rate"
+        :rules="rateRules"
+        label="rate"
         type="Number"
         outlined
         class="texted"
         required
       ></v-text-field>
       <v-text-field
-        v-model="start"
+        v-model="projectData.start"
         :rules="startRules"
         label="start"
         outlined
@@ -33,7 +39,7 @@
         required
       ></v-text-field>
       <v-text-field
-        v-model="image"
+        v-model="projectData.image"
         :rules="imageRules"
         label="image"
         outlined
@@ -41,7 +47,7 @@
         required
       ></v-text-field>
       <v-select
-        v-model="select"
+        v-model="projectData.select"
         :items="items"
         :rules="[v => !!v || 'Status is required']"
         label="Status"
@@ -56,7 +62,18 @@
 </template>
 <script>
 export default {
-  name: "Project"
+  name: "Project",
+  data: () => ({
+    projectData: {
+      name: "",
+      description: "",
+      rate: "",
+      start: "",
+      image: "",
+      state: "",
+      status: ""
+    }
+  })
 };
 </script>
 <style scoped>

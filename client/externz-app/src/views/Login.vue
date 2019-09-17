@@ -5,7 +5,7 @@
     </v-card-title>
     <v-card-text>
       <v-form>
-        <v-text-field prepend-icon="mdi-email" label="Email" outlined />
+        <v-text-field prepend-icon="mdi-email" label="Email" outlined v-model="loginData.email" />
         <v-text-field
           prepend-icon="mdi-lock"
           :type="showPassword ? 'text' : 'password'"
@@ -13,16 +13,17 @@
           outlined
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="showPassword = !showPassword"
+          v-model="loginData.password"
         />
       </v-form>
     </v-card-text>
     <v-card-actions>
       <v-btn class="loginbtn mx-auto pa-2" color="#fa4938">Login</v-btn>
     </v-card-actions>
-    <v-text class="text">
+    <div class="text">
       Not Registered?
       <router-link to="/signup">Sign Up</router-link>Today
-    </v-text>
+    </div>
   </v-card>
 </template>
 
@@ -30,7 +31,11 @@
 export default {
   name: "Login",
   data: () => ({
-    showPassword: false
+    showPassword: false,
+    loginData: {
+      email: "",
+      password: ""
+    }
     // roles: ["student", "business", "admin"]
     //
   })
