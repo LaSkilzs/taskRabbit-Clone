@@ -20,7 +20,7 @@ export default new Router({
       component: Home
     },
     {
-      path: "/profile",
+      path: "/profile/:role/:id",
       name: "profile",
       component: Profile
     },
@@ -58,7 +58,9 @@ export default new Router({
       path: "/skills",
       name: "skills",
       component: Skills
-    }
+    },
+    { path: "/redirect-me", redirect: "/register" },
+    { path: "*", redirect: "/home" }
   ],
   mode: "history"
 });

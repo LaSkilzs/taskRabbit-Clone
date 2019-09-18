@@ -5,7 +5,7 @@
     </v-card-title>
     <v-card-text>
       <v-form>
-        <v-text-field prepend-icon="mdi-email" label="Email" outlined />
+        <v-text-field prepend-icon="mdi-email" label="Email" outlined v-model="signupData.email" />
         <v-text-field
           prepend-icon="mdi-lock"
           :type="showPassword ? 'text' : 'password'"
@@ -13,6 +13,7 @@
           outlined
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="showPassword = !showPassword"
+          v-model="signupData.password"
         />
         <v-text-field
           prepend-icon="mdi-lock"
@@ -21,23 +22,62 @@
           outlined
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="showPassword = !showPassword"
+          v-model="signupData.confirmation"
         />
-        <v-select prepend-icon="mdi-account-circle" :items="roles" :label="roles.name" outlined></v-select>
+        <v-select
+          prepend-icon="mdi-account-circle"
+          :items="roles"
+          :label="roles.name"
+          placeholder="Account Type"
+          outlined
+          v-model="signupData.role"
+        ></v-select>
       </v-form>
     </v-card-text>
     <v-card-actions>
-      <v-btn color="#fa4938" class="submit mb-5">Submit</v-btn>
+      <v-btn color="#fa4938" class="submit mb-5" @click.prevent="onSubmit">Submit</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "SignUp",
+  methods: {
+    onSubmit() {
+      const formData = {
+        email: this.signupData.email,
+        password: this.signupData.password,
+        confirmation: this.signupData.confirmation,
+        role: this.signupData.role
+      };
+      console.log(formData);
+      axios
+        .post("/users", formData)
+        .then(res => {
+          console.log(res.data);
+          this.userId = res.data.user.id;
+          this.userRole = res.data.user.role;
+          localStorage.setItem("role", JSON.stringify(res.data.user.role));
+          localStorage.setItem("user_id", JSON.stringify(res.data.user.id));
+          localStorage.setItem("jwt", JSON.stringify(res.data.jwt));
+          this.$router.push("/register");
+        })
+        .catch(err => err);
+    }
+  },
   data: () => ({
+    userId: "",
+    userRole: "",
     showPassword: false,
-    roles: ["student", "business", "admin"]
-    //
+    roles: ["student", "business", "admin"],
+    signupData: {
+      email: "",
+      password: "",
+      confirmation: "",
+      role: ""
+    }
   })
 };
 </script>

@@ -33,6 +33,6 @@ class Api::V1::StudentSkillsController < ApplicationController
 
   private
   def studentskills_params
-    params.require(:student_skill).permit(:email, :password, :role)
+    params.require(:student_skill).permit(:level, :student_id, :skill_id)
   end
 end

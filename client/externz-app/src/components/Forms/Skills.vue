@@ -5,22 +5,60 @@
         <h1 class="hea display-1 mx-auto">What are your Skills</h1>
       </v-card-title>
       <v-card-text>
-        <v-select :items="skills" :label="skills.name" outlined></v-select>
+        <v-select
+          :items="levels"
+          :label="levels.name"
+          placeholder="skill level"
+          outlined
+          v-model="skillData.select"
+        ></v-select>
+      </v-card-text>
+      <v-card-text>
+        <v-select
+          :items="skills"
+          :label="skills.name"
+          placeholder="skill name"
+          outlined
+          v-model="skillData.select"
+        ></v-select>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="#fa4938" class="submit mb-5">Submit</v-btn>
+        <v-btn color="#fa4938" class="submit mb-5" @click.prevent="onSubmit">Submit</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Skills",
+  created() {
+    if (!localStorage.getItem("jwt")) this.$router.push("/");
+  },
+  methods: {
+    onSubmit() {
+      const formData = {
+        level: this.skillData.level,
+        skill: this.skillData.skill,
+        id: ""
+      };
+      axios
+        .post("/skills", formData)
+        .then(res => res.data)
+        .catch(err => err);
+      this.$router.push("/profile");
+    }
+  },
   data: () => ({
     showPassword: false,
-    skills: ["sample1", "sample2", "sample3"]
-    //
+    levels: ["beginner", "intermediate", "advance", "expert"],
+    skills: ["sample1", "sample2", "sample3"],
+    skillData: {
+      level: "",
+      skill: ""
+    }
   })
 };
 </script>

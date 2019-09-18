@@ -75,7 +75,33 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/projects.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      Project.create(name: row['name'], description: row['description'], duration: row["duration"], rate: row["rate"].to_i, start: row["start"], image: row["image"],status: row["status"])
+      Project.create(name: row['name'], description: row['description'], duration: row["duration"], rate: row["rate"].to_i, start: row["start"], image: row["image"],status: row["status"], business_id: row['business_id'])
+    end
+  end
+
+  
+  desc "import project_skills from csv"
+  task project_skills: :environment do
+    filename = File.join Rails.root, "db/csv/project_skills.csv"
+
+    CSV.foreach(filename, headers: true) do |row|
+      ProjectSkill.create(project_id: row['project_id'], skill_id: row['skill_id'])
+    end
+  end
+  desc "import tasks from csv"
+  task tasks: :environment do
+    filename = File.join Rails.root, "db/csv/tasks.csv"
+
+    CSV.foreach(filename, headers: true) do |row|
+      Task.create(name: row['name'])
+    end
+  end
+  desc "import project_tasks from csv"
+  task project_tasks: :environment do
+    filename = File.join Rails.root, "db/csv/project_tasks.csv"
+
+    CSV.foreach(filename, headers: true) do |row|
+      ProjectTask.create(task_id: row['task_id'], project_id: row['project_id'])
     end
   end
 
