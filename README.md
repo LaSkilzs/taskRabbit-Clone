@@ -34,5 +34,6 @@ Here are the requirements:
 4. Front end UII
 5. Use RoR/VueJs
 6. Push to Git
+7. CR actions for project/user/business -- UD actions are buggy,yet.
 
   
