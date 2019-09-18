@@ -28,28 +28,46 @@
           prepend-icon="mdi-account-circle"
           :items="roles"
           :label="roles.name"
+          placeholder="Account Type"
           outlined
           v-model="signupData.role"
         ></v-select>
       </v-form>
     </v-card-text>
     <v-card-actions>
-      <v-btn color="#fa4938" class="submit mb-5">Submit</v-btn>
+      <v-btn color="#fa4938" class="submit mb-5" @click.prevent="onSubmit">Submit</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "SignUp",
+  methods: {
+    onSubmit() {
+      const formData = {
+        email: this.signupData.email,
+        password: this.signupData.password,
+        confirmation: this.signupData.confirmation,
+        role: this.signupData.role
+      };
+      console.log(formData);
+      // axios
+      //   .post("/users", formData)
+      //   .then(res => res.data)
+      //   .catch(err => err);
+    }
+  },
   data: () => ({
     showPassword: false,
     roles: ["student", "business", "admin"],
-    email: "",
-    password: "",
-    confirmation: "",
-    role: ""
-    //
+    signupData: {
+      email: "",
+      password: "",
+      confirmation: "",
+      role: ""
+    }
   })
 };
 </script>

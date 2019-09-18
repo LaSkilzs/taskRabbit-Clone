@@ -4,12 +4,10 @@
       <v-col cols="12">
         <h1 class="student">Create a Profile</h1>
       </v-col>
-      <v-form ref="form" v-model="valid" lazy-validation class="mx-auto">
+      <v-form ref="form" class="mx-auto">
         <v-col cols="12" class="textRow">
           <v-text-field
             v-model="studentData.fname"
-            :counter="10"
-            :rules="nameRules"
             label="First Name"
             outlined
             class="texted"
@@ -17,8 +15,6 @@
           ></v-text-field>
           <v-text-field
             v-model="studentData.lname"
-            :counter="10"
-            :rules="nameRules"
             label="Last Name"
             outlined
             class="texted"
@@ -26,7 +22,6 @@
           ></v-text-field>
           <v-text-field
             v-model="studentData.phone"
-            :rules="phoneRules"
             label="Phone"
             outlined
             class="texted"
@@ -38,26 +33,19 @@
         <v-col cols="12" class="textRow">
           <v-text-field
             v-model="studentData.street"
-            :rules="streetRules"
             label="street"
             outlined
             class="texted"
             required
           ></v-text-field>
-          <v-text-field
-            v-model="studentData.city"
-            :rules="cityRules"
-            label="city"
-            outlined
-            class="texted"
-            required
-          ></v-text-field>
+          <v-text-field v-model="studentData.city" label="city" outlined class="texted" required></v-text-field>
           <v-select
             v-model="studentData.select"
-            :items="items"
+            :items="statelist"
             :rules="[v => !!v || 'State is required']"
-            label="State"
+            :label="statelist.name"
             outlined
+            placeholder="State "
             class="texted"
             required
           ></v-select>
@@ -65,47 +53,37 @@
         <v-col cols="12" class="textRow">
           <v-text-field
             v-model="studentData.zip"
-            :rules="zipRules"
             label="zip"
             text="Number"
             outlined
             class="texted"
             required
           ></v-text-field>
-
-          <v-text-field
-            v-model="studentData.major"
-            :rules="majorRules"
-            label="major"
-            text="Number"
+          <v-select
+            v-model="studentData.select"
+            :items="majorlist"
+            :rules="[v => !!v || 'Major is required']"
             outlined
             class="texted"
             required
-          ></v-text-field>
-          <v-text-field
+            :label="majorlist.name"
+            placeholder="major"
+          ></v-select>
+          <v-select
             v-model="studentData.education"
-            :rules="educationRules"
-            label="education"
+            :items="education"
+            :label="education.name"
+            :rules="[v => !!v || 'education is required']"
+            placeholder="highest education attained"
             outlined
             class="texted"
             text="Number"
             required
-          ></v-text-field>
+          ></v-select>
         </v-col>
         <v-col cols="12" class="textRow">
           <v-text-field
-            v-model="studentData.degree"
-            :rules="degreeRules"
-            label="degree"
-            outlined
-            class="texted"
-            text="Number"
-            required
-          ></v-text-field>
-
-          <v-text-field
             v-model="studentData.image"
-            :rules="imageRules"
             label="image"
             outlined
             class="texted"
@@ -114,7 +92,6 @@
           ></v-text-field>
           <v-text-field
             v-model="studentData.userId"
-            :rules="userIdRules"
             label="userId"
             outlined
             class="texted"
@@ -124,22 +101,63 @@
         </v-col>
         <v-checkbox
           v-model="studentData.checkbox"
-          :rules="[v => !!v || 'You must agree to continue!']"
+          :rules="[v => !!v || 'You must select to continue!']"
           label="Do you have a degree?"
           outlined
           class="texted"
           required
         ></v-checkbox>
-        <v-btn color="success" class="stuBtn">Submit</v-btn>
+        <v-btn color="success" class="stuBtn" @click.prevent="onSubmit">Submit</v-btn>
       </v-form>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import major from "../../js/Majors";
+import state from "../../js/States";
+import axios from "axios";
+
 export default {
   name: "Student",
+  methods: {
+    onSubmit() {
+      const formData = {
+        fname: this.studentData.fname,
+        lname: this.studentData.lname,
+        phone: this.studentData.phone,
+        street: this.studentData.street,
+        city: this.studentData.city,
+        state: this.studentData.state,
+        zip: this.studentData.zip,
+        degree: this.studentData.degree,
+        education: this.studentData.education,
+        major: this.studentData.major,
+        image: this.studentData.image,
+        user_id: this.user_id
+      };
+      axios
+        .post("/students", formData)
+        .then(res => res.data)
+        .catch(err => err);
+      this.$router.push("/profile");
+    }
+  },
+  created() {
+    if (!localStorage.getItem("jwt")) this.$router.push("/");
+    this.statelist = state;
+    this.majorlist = major;
+  },
   data: () => ({
+    statelist: [],
+    majorlist: [],
+    education: [
+      "high school",
+      "associate degree",
+      "college",
+      "graduate",
+      "doctorate"
+    ],
     studentData: {
       fname: "",
       lname: "",
@@ -151,7 +169,7 @@ export default {
       degree: false,
       education: "",
       major: "",
-      image: "",
+      image: "https://images-na.ssl-images-amazon.com/images/I/4187qTMN5uL.png",
       user_id: ""
     }
   })
@@ -170,7 +188,7 @@ export default {
 }
 .texted {
   margin: 0.5rem;
-  width: 50rem;
+  width: 60rem;
   padding: 0.5rem;
   font-size: 1rem;
   text-align: center;

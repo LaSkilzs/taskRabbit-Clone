@@ -10,28 +10,28 @@
         </v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
-      <v-toolbar-items v-for="btn in menuBtns" :key="btn.title">
-        <v-btn text class="link">
-          <router-link :to="btn.path" class="link">{{btn.title}}</router-link>
-        </v-btn>
+      <v-toolbar-items>
+        <SideBar />
       </v-toolbar-items>
     </v-toolbar>
   </div>
 </template>
 
 <script>
+import SideBar from "../../components/Forms/SideBar";
 export default {
   name: "Navbar",
+  components: {
+    SideBar
+  },
+  methods: {},
   data: () => ({
+    isUser: "" || localStorage["jwt"],
     sideNav: false,
     menuItems: [
       { icon: "home", title: "Home", path: "/home" },
-      { icon: "account_box", title: "Profile", path: "/profile" },
+      { icon: "account_box", title: "Profile", path: "/profile/admin/10" },
       { icon: "work", title: "Projects", path: "/projects" }
-    ],
-    menuBtns: [
-      { icon: "lock_open", title: "Login", path: "/" },
-      { icon: "lock", title: "Logout", path: "/home" }
     ]
   })
 };

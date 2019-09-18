@@ -30,9 +30,9 @@
         </span>
       </div>
 
-      <v-card-actions>
+      <!-- <v-card-actions>
         <v-btn @click="$emit('addToFavs', data.id)" class="butn">add to favs</v-btn>
-      </v-card-actions>
+      </v-card-actions>-->
     </v-card>
   </div>
 </template>
@@ -43,14 +43,15 @@ export default {
   name: "Board",
   methods: {
     addToFavs(project_id) {
-      // this.projectData = this.projectData.filter(project => project_id !== id);
-      console.log(project_id);
+      axios.post("/projects", project_id).then(res => res.data);
+      this.$router.push("/projects");
     }
   },
   created() {
     axios
-      .get("http://localhost:3000/api/v1/projects")
-      .then(res => (this.projectData = res.data));
+      .get("/projects")
+      .then(res => (this.projectData = res.data))
+      .catch(err => err);
   },
   data: () => ({
     projectData: []

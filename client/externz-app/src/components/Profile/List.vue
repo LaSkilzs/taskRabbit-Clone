@@ -14,10 +14,10 @@ export default {
   showList: false,
   data: () => ({
     listItems: [
-      { title: "manage profile", path: "/create-profile" },
-      { title: "manage skills", path: "/skills" },
-      { title: "past projects", path: "/projects" },
-      { title: "manage account", path: "/signup" }
+      { title: "edit profile", path: "/create-profile" },
+      { title: "delete profile", path: "/create-profile" },
+      { title: "add project skills", path: "/skills" },
+      { title: "create projects", path: "/create-project" }
     ]
   })
 };
@@ -32,12 +32,14 @@ export default {
   margin-top: 3rem;
 }
 .rowed {
-  width: 80rem;
+  width: 65rem;
   margin-top: 3rem;
+  margin: auto;
 }
 .colbtn {
   display: "flex";
   background: #fa4938 !important;
+  justify-content: center;
 }
 .link {
   text-decoration: none;

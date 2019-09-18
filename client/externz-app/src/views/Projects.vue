@@ -9,8 +9,8 @@
             <v-card class="card pa-2" outlined tile>
               <v-list-item three-line>
                 <v-list-item-content>
-                  <div class="overline mb-4">{{n.company}}</div>
-                  <v-list-item-title class="headline mb-1 mt-3">{{n.project}}</v-list-item-title>
+                  <div class="overline mb-4">{{bizName || "No Company Name"}}</div>
+                  <v-list-item-title class="headline mb-1 mt-3">{{n.name}}</v-list-item-title>
                   <v-list-item-subtitle class="descript">{{n.description}}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -24,12 +24,12 @@
                   {{n.rate}}
                 </span>
                 <span class="m">
-                  <b>start:</b>
-                  {{n.start}}
+                  <b>status:</b>
+                  {{n.status}}
                 </span>
               </div>
               <v-card-actions>
-                <v-btn @click="$emit('deleteFavs', n.id)" class="butn">delete fav</v-btn>
+                <v-btn @click="$emit('deleteProject', n.id)" class="butn">delete project</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -41,48 +41,64 @@
 </template>
 <script>
 import Bar from "../components/Projects/Bar";
+import axios from "axios";
 export default {
   name: "Projects",
   components: {
     Bar
   },
+  created() {
+    if (!localStorage.getItem("jwt")) this.$router.push("/");
+    axios
+      .get("/businesses/" + localStorage.getItem("bizId"))
+      .then(res => {
+        this.projects = res.data.projects;
+        this.bizName = localStorage.getItem("bizName");
+        console.log(this.bizName);
+      })
+      .catch(err => this.$router.push("/"));
+  },
   methods: {
-    deleteFavs(project_id) {
+    deleteProject(project_id) {
+      fetch("http://localhost:3000/api/v1/projects/" + project_id, {
+        method: "DELETE"
+      }).then(res => console.log(res));
       this.projectData = this.projects.filter(project => project_id !== id);
     }
   },
   data: () => ({
+    bizName: "",
     projects: [
-      {
-        id: 1,
-        company: "XYZ Company",
-        project: "The Best Project Ever",
-        description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
-        rate: "tba",
-        duration: "2_days",
-        start: "11/23/2019"
-      },
-      {
-        id: 2,
-        company: "XYZ Company",
-        project: "The Best Project Ever",
-        description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
-        rate: "tba",
-        duration: "2_days",
-        start: "11/23/2019"
-      },
-      {
-        id: 3,
-        company: "XYZ Company",
-        project: "The Best Project Ever",
-        description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
-        rate: "tba",
-        duration: "2_days",
-        start: "11/23/2019"
-      }
+      // {
+      //   id: 1,
+      //   company: "XYZ Company",
+      //   project: "The Best Project Ever",
+      //   description:
+      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
+      //   rate: "tba",
+      //   duration: "2_days",
+      //   start: "11/23/2019"
+      // },
+      // {
+      //   id: 2,
+      //   company: "XYZ Company",
+      //   project: "The Best Project Ever",
+      //   description:
+      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
+      //   rate: "tba",
+      //   duration: "2_days",
+      //   start: "11/23/2019"
+      // },
+      // {
+      //   id: 3,
+      //   company: "XYZ Company",
+      //   project: "The Best Project Ever",
+      //   description:
+      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
+      //   rate: "tba",
+      //   duration: "2_days",
+      //   start: "11/23/2019"
+      // }
     ]
   })
 };

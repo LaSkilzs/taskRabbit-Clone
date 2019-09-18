@@ -18,8 +18,11 @@
               <v-col cols="6" sm="6" md="12">
                 <v-text-field label="name" :placeholder="item.name" outlined></v-text-field>
               </v-col>
-              <v-col cols="6" sm="6" md="12">
+              <v-col cols="6" sm="6" md="12" v-if="isStudent">
                 <v-text-field label="email" :placeholder="item.email" outlined></v-text-field>
+              </v-col>
+              <v-col cols="6" sm="6" md="12" v-if="!isStudent">
+                <v-text-field label="email" :placeholder="item.tagline" outlined></v-text-field>
               </v-col>
               <v-col cols="6" sm="6" md="12">
                 <v-text-field :placeholder="item.current" outlined></v-text-field>
@@ -28,9 +31,7 @@
           </v-col>
         </v-row>
       </v-card>
-      <!-- <v-row class="row"> -->
       <List />
-      <!-- </v-row> -->
     </v-container>
   </div>
 </template>
@@ -38,22 +39,49 @@
 
 <script>
 import List from "../components/Profile/List";
+import axios from "axios";
 export default {
   name: "Profile",
   components: {
     List
   },
-  data: () => ({
-    profileData: [
-      {
-        image:
-          "https://images-na.ssl-images-amazon.com/images/I/4187qTMN5uL.png",
-        name: "The Doe",
-        email: "doe@email.com",
-        current: 0
+  created() {
+    if (!localStorage.getItem("jwt")) this.$router.push("/");
+
+    fetch("http://localhost:3000/api/v1/authenticate", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer, ${localStorage.getItem("jwt")}`
       }
-    ]
-  })
+    })
+      .then(res => {
+        res.json().then(data => {
+          this.profileData = [data.business] || [data.student];
+          if (data.business) this.profileData[0]["image"] = this.image;
+          localStorage.setItem("bizId", data.business.id);
+          localStorage.setItem("bizName", data.business.name);
+          if (data.business) this.profileData[0]["email"] = data.user.email;
+          console.log(this.profileData);
+          if (!localStorage.getItem("jwt")) this.$router.push("/");
+          data.user.role === "student"
+            ? (this.isStudent = true)
+            : this.isStudent;
+        });
+      })
+      .catch(err => this.$router.push("/"));
+  },
+  data: () => ({
+    student: false,
+    noProfile: true,
+    profileData: [],
+    image:
+      "http://cdn.static-economist.com/sites/default/files/imagecache/full-width/20140118_wbp005_0.jpg"
+  }),
+  methods: {
+    isStudent: () => {
+      if (localStorage.getItem("role") === "student") this.student = true;
+    }
+  }
 };
 </script>
 <style  scoped>
@@ -65,9 +93,6 @@ export default {
 .image {
   margin: 0 auto;
   margin-top: 1rem;
-}
-.row {
-  border: 1rem solid grey;
 }
 .cardRow {
   margin: 0 auto;
