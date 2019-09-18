@@ -7,7 +7,7 @@
         width="50rem"
         height="25rem"
         v-for="item in profileData"
-        :key="item.name"
+        :key="item.image"
       >
         <v-row class="cardRow">
           <v-col cols="6">

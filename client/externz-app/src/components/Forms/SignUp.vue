@@ -53,13 +53,23 @@ export default {
         role: this.signupData.role
       };
       console.log(formData);
-      // axios
-      //   .post("/users", formData)
-      //   .then(res => res.data)
-      //   .catch(err => err);
+      axios
+        .post("/users", formData)
+        .then(res => {
+          console.log(res.data);
+          this.userId = res.data.user.id;
+          this.userRole = res.data.user.role;
+          localStorage.setItem("role", JSON.stringify(res.data.user.role));
+          localStorage.setItem("user_id", JSON.stringify(res.data.user.id));
+          localStorage.setItem("jwt", JSON.stringify(res.data.jwt));
+          this.$router.push("/register");
+        })
+        .catch(err => err);
     }
   },
   data: () => ({
+    userId: "",
+    userRole: "",
     showPassword: false,
     roles: ["student", "business", "admin"],
     signupData: {

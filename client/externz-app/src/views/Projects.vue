@@ -30,6 +30,7 @@
               </div>
               <v-card-actions>
                 <v-btn @click="$emit('deleteProject', n.id)" class="butn">delete project</v-btn>
+                <v-btn @click="$emit('editProject', n.id)" class="butn">edit project</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -60,46 +61,27 @@ export default {
   },
   methods: {
     deleteProject(project_id) {
+      console.log(project_id);
       fetch("http://localhost:3000/api/v1/projects/" + project_id, {
-        method: "DELETE"
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: project_id })
       }).then(res => console.log(res));
-      this.projectData = this.projects.filter(project => project_id !== id);
+      this.projects = this.projects.filter(project => project_id !== id);
+    },
+    editProject(project_id) {
+      console.log(project_id);
+      fetch("http://localhost:3000/api/v1/projects/" + project_id, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: project_id })
+      }).then(res => console.log(res));
+      this.projects = this.projects.filter(project => project_id !== id);
     }
   },
   data: () => ({
     bizName: "",
-    projects: [
-      // {
-      //   id: 1,
-      //   company: "XYZ Company",
-      //   project: "The Best Project Ever",
-      //   description:
-      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
-      //   rate: "tba",
-      //   duration: "2_days",
-      //   start: "11/23/2019"
-      // },
-      // {
-      //   id: 2,
-      //   company: "XYZ Company",
-      //   project: "The Best Project Ever",
-      //   description:
-      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
-      //   rate: "tba",
-      //   duration: "2_days",
-      //   start: "11/23/2019"
-      // },
-      // {
-      //   id: 3,
-      //   company: "XYZ Company",
-      //   project: "The Best Project Ever",
-      //   description:
-      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque hic modi corrupti mollitia consectetur inventore non qui, facilis dolor, voluptatum tempora? Et animi qui iusto nostrum eaque blanditiis possimus sed? elit.",
-      //   rate: "tba",
-      //   duration: "2_days",
-      //   start: "11/23/2019"
-      // }
-    ]
+    projects: []
   })
 };
 </script>
@@ -130,6 +112,9 @@ export default {
 }
 .descript {
   margin-top: 1rem;
+}
+.butn {
+  width: 10rem !important;
 }
 </style>
 

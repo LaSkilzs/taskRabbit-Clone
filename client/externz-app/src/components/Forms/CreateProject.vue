@@ -71,11 +71,11 @@ export default {
         business_id: localStorage.getItem("bizId")
       };
       console.log(formData);
-      //   axios
-      //     .post("/projects", formData)
-      //     .then(res => res.data)
-      //     .catch(err => err);
-      //   this.$router.push("/home");
+      axios
+        .post("/projects", formData)
+        .then(res => res.data)
+        .catch(err => err);
+      this.$router.push("/projects");
     }
   },
   data: () => ({

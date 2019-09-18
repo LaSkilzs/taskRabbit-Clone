@@ -59,6 +59,7 @@ export default new Router({
       name: "skills",
       component: Skills
     },
+    { path: "/redirect-me", redirect: "/register" },
     { path: "*", redirect: "/home" }
   ],
   mode: "history"

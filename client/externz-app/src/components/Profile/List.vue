@@ -14,10 +14,10 @@ export default {
   showList: false,
   data: () => ({
     listItems: [
-      { title: "edit profile", path: "/create-profile" },
+      // { title: "edit profile", path: "/create-profile" },
       { title: "delete profile", path: "/create-profile" },
       { title: "add project skills", path: "/skills" },
-      { title: "create projects", path: "/create-project" }
+      { title: "create project", path: "/create-project" }
     ]
   })
 };
