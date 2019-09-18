@@ -18,25 +18,21 @@ Here are the requirements:
 ## Crud Actions
 
     user create
-    user update
-    user delete
-    user show
-
-    business create profile
-    business delete
-    business edit
-    business show
-
-    student create profile
-    student delete
-    student edit
-    student show
-
-    project create profile
+    business create
+    
+    project create 
     project delete
     project edit
     project show
+    
+    
+    
+## What was completed by tuesday
+1. 3 resources besides a User
+2. Many to Many relationshps
+3. User auth/authoriz
+4. Front end UII
+5. Use RoR/VueJs
+6. Push to Git
 
-    joinTable
-    skill
-    task
+  
